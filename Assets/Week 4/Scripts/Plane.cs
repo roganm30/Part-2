@@ -18,6 +18,7 @@ public class Plane : MonoBehaviour
     public AnimationCurve landing;
     float timerValue;
     public List<Sprite> planeSprites;
+    bool landed = false;
     
     private void Start()
     {
@@ -49,13 +50,14 @@ public class Plane : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if(landed)
         {
             timerValue += 0.5f * Time.deltaTime;
             float interpolation = landing.Evaluate(timerValue);
             if(transform.localScale.z < 0.1f)
             {
                 Destroy(gameObject);
+                GameObject.Find("Runway").GetComponent<Runway>().playerScore++;
             }
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, interpolation);
         }
@@ -78,14 +80,23 @@ public class Plane : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteRenderer.color = Color.red;
+        if(collision.gameObject.tag == "plane")
+        {
+            spriteRenderer.color = Color.red;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Vector2.Distance(gameObject.transform.position, collision.transform.position) <= 0.5f)
+        if((Vector2.Distance(gameObject.transform.position, collision.transform.position) <= 0.5f) && (collision.gameObject.tag == "plane"))
         {
             Destroy(gameObject);
+        }
+
+        if(collision.OverlapPoint(gameObject.transform.position) && (collision.gameObject.tag == "runway"))
+        {
+            landed = true;
+            
         }
     }
 
