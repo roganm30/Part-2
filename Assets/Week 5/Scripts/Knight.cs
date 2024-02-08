@@ -10,6 +10,7 @@ public class Knight : MonoBehaviour
     public float speed = 3.0f;
     Rigidbody2D rb;
     Animator animator;
+    bool clickingOnSelf = false;
 
     void Start()
     {
@@ -32,10 +33,20 @@ public class Knight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !clickingOnSelf)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         animator.SetFloat("Movement", movement.magnitude);
+    }
+
+    private void OnMouseDown()
+    {
+        clickingOnSelf = true;
+        animator.SetTrigger("TakeDamage");
+    }
+    private void OnMouseUp()
+    {
+        clickingOnSelf = false;
     }
 }
