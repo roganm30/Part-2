@@ -3795,6 +3795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalieRB: {fileID: 2178781642853894586}
   radius: 2.4
+  speed: 0.1
 --- !u!4 &928852161
 Transform:
   m_ObjectHideFlags: 0

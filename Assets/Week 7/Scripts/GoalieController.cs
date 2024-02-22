@@ -8,6 +8,7 @@ public class GoalieController : MonoBehaviour
     Vector2 direction;
     float magnitude;
     public float radius = 2.4f;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +29,11 @@ public class GoalieController : MonoBehaviour
     {
         if(magnitude / 2 < radius)
         {
-            goalieRB.position = (Vector2)transform.position - direction * magnitude / 2;
+            goalieRB.position = Vector2.MoveTowards(goalieRB.position, (Vector2)transform.position - direction * magnitude / 2, speed);
         } 
         else
         {
-            goalieRB.position = (Vector2)transform.position - direction * radius;
+            goalieRB.position = Vector2.MoveTowards(goalieRB.position, (Vector2)transform.position - direction * radius, speed);
         }
     }
 }
