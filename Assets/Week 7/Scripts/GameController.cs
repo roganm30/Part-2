@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class GameController : MonoBehaviour
     float charge;
     public float maxCharge = 1;
     Vector2 direction;
+    public static float score = 0;
+    public TextMeshProUGUI scoreText;
+    
     public static SoccerPlayer SelectedPlayer { get; private set; }
     public static void SetSelectedPlayer(SoccerPlayer player)
     {
@@ -20,7 +25,7 @@ public class GameController : MonoBehaviour
         SelectedPlayer = player;
         SelectedPlayer.Selected(true);
     }
-
+    
     private void FixedUpdate()
     {
         if (direction != Vector2.zero)
@@ -30,6 +35,7 @@ public class GameController : MonoBehaviour
             charge = 0;
             chargeSlider.value = charge;
         }
+        scoreText.text = score.ToString();
     }
 
     private void Update()
