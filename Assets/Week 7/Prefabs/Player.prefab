@@ -101,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 4
+  m_LinearDrag: 3
   m_AngularDrag: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 2723854268452493668}
+  speed: 1000
 --- !u!1 &2775580656060624755
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,10 +8,13 @@ public class SoccerPlayer : MonoBehaviour
 {
     bool selected = false;
     public SpriteRenderer sprite;
+    Rigidbody2D rb;
+    public float speed = 500f;
     
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         sprite.color = Color.red;
         Selected(false);
     }
@@ -40,5 +43,10 @@ public class SoccerPlayer : MonoBehaviour
     private void OnMouseDown()
     {
         GameController.SetSelectedPlayer(this);
+    }
+
+    public void Move(Vector2 direction)
+    {
+        rb.AddForce(direction * speed);
     }
 }
