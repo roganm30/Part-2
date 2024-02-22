@@ -13,6 +13,7 @@ public class SoccerPlayer : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
+        Selected(false);
     }
 
     
@@ -26,11 +27,18 @@ public class SoccerPlayer : MonoBehaviour
 
     public void Selected(bool isSelected)
     {
-        sprite.color = Color.yellow;
+        if (isSelected)
+        {
+            sprite.color = Color.yellow;
+        }
+        else
+        {
+            sprite.color = Color.red;
+        }
     }
 
     private void OnMouseDown()
     {
-        selected = true;
+        GameController.SetSelectedPlayer(this);
     }
 }
