@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Hero : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Hero : MonoBehaviour
     {
         movement = destination - (Vector2)transform.position;
 
-        if (movement.magnitude < 0.1)
+        if (movement.magnitude < 0.1 || EventSystem.current.IsPointerOverGameObject())
         {
             movement = Vector2.zero;
         }

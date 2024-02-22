@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    Vector2 destination;
+    Vector2 movement;
     public float speed = 2f;
     Rigidbody2D rigidbody;
     Vector2 direction = new Vector2(5, 0);
@@ -22,7 +24,8 @@ public class Arrow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.MovePosition(rigidbody.position - direction * speed * Time.deltaTime);
+        movement = (Vector2)GameObject.Find("Hero").transform.position - (Vector2)transform.position;
+        rigidbody.MovePosition(rigidbody.position + movement.normalized * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
