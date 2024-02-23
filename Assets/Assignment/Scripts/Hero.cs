@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Hero : MonoBehaviour
 {
@@ -11,9 +13,10 @@ public class Hero : MonoBehaviour
     public float speed = 3.0f;
     Rigidbody2D rb;
     Animator animator;
-    bool clickingOnSelf = false;
     public float health;
     public float maxHealth = 5.0f;
+
+    // using code from in-class assignment for assistance, with changes made //
 
     void Start()
     {
@@ -35,9 +38,9 @@ public class Hero : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
-        if (Input.GetMouseButtonDown(0) && !clickingOnSelf)
+        if (Input.GetMouseButtonDown(0))
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -48,17 +51,6 @@ public class Hero : MonoBehaviour
         animator.SetFloat("Movement", movement.magnitude);
     }
 
-    private void OnMouseDown()
-    {
-        clickingOnSelf = true;
-        SendMessage("TakeDamage", 1);
-    }
-
-    private void OnMouseUp()
-    {
-        clickingOnSelf = false;
-    }
-
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -66,6 +58,7 @@ public class Hero : MonoBehaviour
         if (health == 0)
         {
             animator.SetTrigger("Death");
+            SceneManager.LoadScene(1);
         }
         else
         {
@@ -77,4 +70,5 @@ public class Hero : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+
 }

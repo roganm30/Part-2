@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 6f);
     }
 
     private void FixedUpdate()
